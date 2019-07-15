@@ -3,8 +3,8 @@ from abc import ABC, abstractmethod
 
 class IOS(object):
 
-    def __init__(self, mail_manger, calendar_manager):
-        self.mail_manager = mail_manger
+    def __init__(self, mail_manager, calendar_manager):
+        self.mail_manager = mail_manager
         self.calendar_manager = calendar_manager
 
     def send_email(self):
