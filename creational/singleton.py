@@ -11,7 +11,6 @@ def main():
     instanceA = Singleton()
     instanceB = Singleton()
     assert id(instanceA) == id(instanceB)
-    print(id(instanceA), id(instanceB))
 
 
 if __name__ == "__main__":
