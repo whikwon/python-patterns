@@ -1,92 +1,69 @@
-from abc import ABC, abstractmethod
-
-
-class SmartHomeSystem(ABC):
-
-    @abstractmethod
-    def _set_temperature(self):
-        pass
-
-    @abstractmethod
-    def _set_tv_status(self):
-        pass
-
-    @abstractmethod
-    def update_temperature(self):
-        pass
-
-    @abstractmethod
-    def display(self):
-        pass
-
-
-class XiSmartHomeSystem(object):
+class Dashboard(object):
 
     def __init__(self):
-        self.tv_status = "off"
-        self.temperature = 20
+        self.racers = []
 
-    def _set_temperature(self, temperature):
-        self.temperature = temperature
+    def add_racer(self, racer):
+        self.racers.append(racer)
+        print(f"Racer {racer.name} has registered.")
 
-    def update_temperature(self, *appliances):
-        for app in appliances:
-            app.set_temperature(self.temperature)
-
-    def _set_tv_status(self, status):
-        self.tv_status = status
-
-    def display(self):
-        print("===== XI SMART HOME SYSTEM =====")
-        print(f"CURRENT TEMPERATURE: {self.temperature} degree")
-        print(f"TV: {self.tv_status}")
+    def update_status(self):
+        for i, racer in enumerate(self.racers):
+            print(f"[{i}]. Racer {racer.name} passed {racer.position}m")
 
 
-class TemperatureController(object):
+class CarRacer(object):
 
-    def __init__(self, smart_home_system):
-        self.smart_home_system = smart_home_system
-        self.temperature = 20
+    def __init__(self, name, dashboard):
+        self._name = name
+        self.dashboard = dashboard
+        self._position = 0
+        self._velocity = 0
 
-    def set_temperature(self, temperature):
-        self.temperature = temperature
-        self.smart_home_system._set_temperature(temperature)
-        print(f"Set temperature to {temperature} by temperature controller.")
+    def slow_down(self):
+        self._velocity -= 20
+        if self._velocity < 0:
+            self._velocity = 0
 
+    def speed_up(self):
+        self._velocity += 20
 
-class TV(object):
+    def drive(self):
+        self._position += self._velocity
 
-    def __init__(self, smart_home_system):
-        self.smart_home_system = smart_home_system
-        self.temperature = 20
-        self.status = "off"
+    def update_status(self):
+        self.dashboard.update_status()
 
-    def set_temperature(self, temperature):
-        self.temperature = temperature
+    @property
+    def name(self):
+        return self._name
 
-    def turn_on(self):
-        if self.status == "off":
-            self.status = "on"
-            self.smart_home_system._set_tv_status(self.status)
-            print("Turned TV on")
-
-    def turn_off(self):
-        if self.status == "on":
-            self.status = "off"
-            self.smart_home_system._set_tv_status(self.status)
-            print("Turned TV off")
+    @property
+    def position(self):
+        return self._position
 
 
 def main():
-    smart_home_system = XiSmartHomeSystem()
-    temp_controller = TemperatureController(smart_home_system)
-    tv = TV(smart_home_system)
+    dashboard = Dashboard()
 
-    temp_controller.set_temperature(40)
-    tv.turn_on()
+    john = CarRacer("John", dashboard)
+    mike = CarRacer("Mike", dashboard)
+    anna = CarRacer("Anna", dashboard)
 
-    smart_home_system.update_temperature(tv)
-    smart_home_system.display()
+    dashboard.add_racer(john)
+    dashboard.add_racer(mike)
+    dashboard.add_racer(anna)
+
+    john.speed_up()
+    john.speed_up()
+    mike.speed_up()
+    anna.speed_up()
+
+    john.drive()
+    mike.drive()
+    anna.drive()
+
+    john.update_status()
 
 
 if __name__ == "__main__":
