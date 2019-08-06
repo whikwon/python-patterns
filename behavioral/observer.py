@@ -1,11 +1,11 @@
 import time
-from abc import ABC, abstractmethod
 
 
-class YouTubeChannel(ABC):
+class YouTubeChannel(object):
 
-    def __init__(self):
+    def __init__(self, channel):
         self.subscribers = []
+        self.channel = channel
 
     def add_subscriber(self, subscriber):
         self.subscribers.append(subscriber)
@@ -20,21 +20,6 @@ class YouTubeChannel(ABC):
 
     def notify_subscriber(self, subscriber, notification):
         subscriber.notifications.append(notification)
-
-    @abstractmethod
-    def upload_video(self, video_name):
-        pass
-
-    @abstractmethod
-    def live_streaming(self):
-        pass
-
-
-class CrashCourse(YouTubeChannel):
-
-    def __init__(self, channel):
-        super().__init__()
-        self.channel = channel
 
     def upload_video(self, video_name):
         now = time.strftime("%Y%m%d-%H%M%S")
@@ -58,15 +43,21 @@ class YouTubeUser(object):
 
 
 def main():
-    crashcourse = CrashCourse("crashcourse")
+    crashcourse = YouTubeChannel("CrashCourse")
+    national_geographic = YouTubeChannel("NationalGeographic")
+
     john = YouTubeUser("john")
     mary = YouTubeUser("mary")
 
     john.subscribe(crashcourse)
     mary.subscribe(crashcourse)
 
-    crashcourse.upload_video("CS101-HelloWorld")
+    john.subscribe(national_geographic)
 
+    crashcourse.upload_video("CS101-HelloWorld")
+    national_geographic.live_streaming()
+
+    # check notifications
     for person in [john, mary]:
         print(person.notifications)
 
