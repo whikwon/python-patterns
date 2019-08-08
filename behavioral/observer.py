@@ -3,9 +3,9 @@ import time
 
 class YouTubeChannel(object):
 
-    def __init__(self, channel):
+    def __init__(self, channel_name):
         self.subscribers = []
-        self.channel = channel
+        self.channel_name = channel_name
 
     def add_subscriber(self, subscriber):
         self.subscribers.append(subscriber)
@@ -23,12 +23,12 @@ class YouTubeChannel(object):
 
     def upload_video(self, video_name):
         now = time.strftime("%Y%m%d-%H%M%S")
-        msg = f"[{now}] ({self.channel}) {video_name} has just uploaded"
+        msg = f"[{now}] ({self.channel_name}) {video_name} has just uploaded"
         self.notify_all_subcribers(msg)
 
     def live_streaming(self):
         now = time.strftime("%Y%m%d-%H%M%S")
-        msg = f"[{now}] ({self.channel}) Live streaming is going on!"
+        msg = f"[{now}] ({self.channel_name}) Live streaming is going on!"
         self.notify_all_subcribers(msg)
 
 
