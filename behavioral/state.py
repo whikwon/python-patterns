@@ -1,9 +1,5 @@
-"""Vending Machine State Pattern
+"""State Pattern"""
 
-TODO:
-  - add current deposit for every transition.
-  - rename variables.
-"""
 from abc import ABC, abstractmethod
 
 
