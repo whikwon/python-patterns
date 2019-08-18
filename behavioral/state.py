@@ -27,7 +27,7 @@ class BaseState(ABC):
 class WaitingState(BaseState):
 
     def exchange(self):
-        print("Nothing happened.")
+        self.machine.empty_money()
 
     def select_drink(self):
         print("Nothing happened.")
@@ -41,6 +41,7 @@ class WaitingState(BaseState):
 class SelectDrinkState(BaseState):
 
     def exchange(self):
+        self.machine.empty_money()
         self.machine.change_state(WaitingState(self.machine))
 
     def insert_money(self, amount):
@@ -72,6 +73,10 @@ class VendingMachine(object):
     def select_drink(self, drink):
         self.state.select_drink(drink)
 
+    def empty_money(self):
+        print(f"{self.amount} has returned. ([deposit]: 0)")
+        self.amount = 0
+
     def cumulate_money(self, amount):
         self.amount += amount
 
@@ -87,10 +92,13 @@ class VendingMachine(object):
 def main():
     vending_machine = VendingMachine()
 
-    vending_machine.insert_money(50)
+    vending_machine.insert_money(110)
     vending_machine.select_drink('cola')
-    vending_machine.insert_money(50)
-    vending_machine.select_drink('cola')
+
+    vending_machine.insert_money(30)
+    vending_machine.select_drink('sprite')
+
+    vending_machine.exchange()
 
 
 if __name__ == "__main__":
