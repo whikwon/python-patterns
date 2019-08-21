@@ -86,7 +86,7 @@ class VendingMachine(object):
             self.amount -= price
             print(f"Got {drink}. ([deposit]: {self.amount})")
         else:
-            print(f"Not afforable. ([deposit]: {self.amount})")
+            print(f"Not affordable. ([deposit]: {self.amount})")
 
 
 def main():
