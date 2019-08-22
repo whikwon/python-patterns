@@ -1,15 +1,15 @@
 from abc import ABC
 
 
-class Cook(object):
+class Chef(object):
     def __init__(self, name):
         self.name = name
 
-    def set_fan(self, fan):
-        self.fan = fan
+    def set_pan(self, pan):
+        self.pan = pan
 
     def cook(self, menu):
-        print(f"{self.name} prepared {menu} using {self.fan.name}")
+        print(f"{self.name} prepared {menu} using {self.pan.name}")
 
 
 class Pan(ABC):
@@ -28,12 +28,12 @@ def main():
     chinese_frying_pan = ChineseFryingPan()
     sauce_pan = SaucePan()
 
-    cook = Cook("John")
-    cook.set_fan(chinese_frying_pan)
-    cook.cook("fried_rice")
+    chef = Chef("John")
+    chef.set_pan(chinese_frying_pan)
+    chef.cook("fried_rice")
 
-    cook.set_fan(sauce_pan)
-    cook.cook("soup")
+    chef.set_pan(sauce_pan)
+    chef.cook("soup")
 
 
 if __name__ == "__main__":
