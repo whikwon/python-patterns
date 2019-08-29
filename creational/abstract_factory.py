@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 
 
 class PizzaStore(ABC):
-
     @abstractmethod
     def prepare_peperroni():
         pass
@@ -13,7 +12,6 @@ class PizzaStore(ABC):
 
 
 class PizzaHut(PizzaStore):
-
     def prepare_peperroni():
         return BeefPepperoni()
 
@@ -22,7 +20,6 @@ class PizzaHut(PizzaStore):
 
 
 class DominoPizza(PizzaStore):
-
     def prepare_peperroni():
         return PorkPepperoni()
 

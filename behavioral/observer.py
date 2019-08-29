@@ -2,7 +2,6 @@ import time
 
 
 class YouTubeChannel(object):
-
     def __init__(self, channel_name):
         self.subscribers = []
         self.channel_name = channel_name
@@ -33,7 +32,6 @@ class YouTubeChannel(object):
 
 
 class YouTubeUser(object):
-
     def __init__(self, name):
         self.name = name
         self.notifications = []

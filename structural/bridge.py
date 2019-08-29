@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 
 
 class IOS(object):
-
     def __init__(self, mail_manager, calendar_manager):
         self.mail_manager = mail_manager
         self.calendar_manager = calendar_manager
@@ -15,39 +14,33 @@ class IOS(object):
 
 
 class MailManager(ABC):
-
     @abstractmethod
     def send_email(self):
         pass
 
 
 class GMail(MailManager):
-
     def send_email(self):
         print("Sent e-mail to your manager by GMail.")
 
 
 class NaverMail(MailManager):
-
     def send_email(self):
         print("Sent e-mail to your manager by NaverMail.")
 
 
 class CalendarManager(ABC):
-
     @abstractmethod
     def add_appointment(self):
         pass
 
 
 class GoogleCalendar(CalendarManager):
-
     def add_appointment(self):
         print("Added appointment to your google calendar.")
 
 
 class NaverCalendar(CalendarManager):
-
     def add_appointment(self):
         print("Added appointment to your naver calendar.")
 

@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 
 
 class HouseBuilder(ABC):
-
     @abstractmethod
     def create_foundation(self):
         pass
@@ -29,7 +28,6 @@ class HouseBuilder(ABC):
 
 
 class SingleFloorHouseBuilder(HouseBuilder):
-
     def __init__(self):
         self.house = "single floor house with\n"
 
@@ -53,7 +51,6 @@ class SingleFloorHouseBuilder(HouseBuilder):
 
 
 class Director(object):
-
     def __init__(self, builder):
         self.builder = builder
 

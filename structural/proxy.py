@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 
 
 class Worker(ABC):
-
     def __init__(self, name):
         self.name = name
         self.schedule = []
@@ -17,7 +16,6 @@ class Worker(ABC):
 
 
 class Secretary(Worker):
-
     def __init__(self, name, ceo):
         super().__init__(name)
         self.ceo = ceo
@@ -32,7 +30,6 @@ class Secretary(Worker):
 
 
 class CEO(Worker):
-
     def append_schedule(self, schedule):
         self.schedule.append(schedule)
 

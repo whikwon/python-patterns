@@ -2,14 +2,12 @@ from abc import ABC, abstractmethod
 
 
 class Employee(ABC):
-
     @abstractmethod
     def print_information(self):
         pass
 
 
 class DataEngineer(Employee):
-
     def __init__(self, name):
         self.name = name
 
@@ -18,7 +16,6 @@ class DataEngineer(Employee):
 
 
 class DataEngineeringTeam(Employee):
-
     def __init__(self):
         self.team = []
 

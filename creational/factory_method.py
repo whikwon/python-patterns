@@ -1,21 +1,18 @@
-from abc import abstractmethod, ABC
+from abc import ABC, abstractmethod
 
 
 class Stall(ABC):
-
     @abstractmethod
     def create_product():
         pass
 
 
 class HotdogStall(Stall):
-
     def prepare_food():
         return Hotdog()
 
 
 class PizzaStall(Stall):
-
     def prepare_food():
         return Pizza()
 

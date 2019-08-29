@@ -15,7 +15,6 @@ class AccountVerifier(ABC):
 
 
 class PasswordVerifier(AccountVerifier):
-
     def authenticate(self):
         pwd = input("Input the password: ")
         if pwd == "0102":
@@ -25,7 +24,6 @@ class PasswordVerifier(AccountVerifier):
 
 
 class CellPhoneVerifier(AccountVerifier):
-
     def authenticate(self):
         pwd = input("Input the authorization number: ")
         if pwd == "8194":

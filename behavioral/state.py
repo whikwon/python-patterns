@@ -2,12 +2,10 @@
 
 from abc import ABC, abstractmethod
 
-
 menus = dict(cola=100, sprite=50, mirinda=40, fanta=50)
 
 
 class BaseState(ABC):
-
     def __init__(self, machine):
         self.machine = machine
 
@@ -25,7 +23,6 @@ class BaseState(ABC):
 
 
 class WaitingState(BaseState):
-
     def exchange(self):
         self.machine.empty_money()
 
@@ -39,7 +36,6 @@ class WaitingState(BaseState):
 
 
 class SelectDrinkState(BaseState):
-
     def exchange(self):
         self.machine.empty_money()
         self.machine.change_state(WaitingState(self.machine))
@@ -56,7 +52,6 @@ class SelectDrinkState(BaseState):
 
 
 class VendingMachine(object):
-
     def __init__(self):
         self.state = WaitingState(self)
         self.amount = 0
@@ -93,10 +88,10 @@ def main():
     vending_machine = VendingMachine()
 
     vending_machine.insert_money(110)
-    vending_machine.select_drink('cola')
+    vending_machine.select_drink("cola")
 
     vending_machine.insert_money(30)
-    vending_machine.select_drink('sprite')
+    vending_machine.select_drink("sprite")
 
     vending_machine.exchange()
 

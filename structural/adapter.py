@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 
 
 class PowerPlug(ABC):
-
     @abstractmethod
     def plug_charger_in(item):
         pass
