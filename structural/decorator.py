@@ -1,42 +1,82 @@
-"""
-Add item various functionalities in runtime.
-"""
-
 from abc import ABC, abstractmethod
 
 
-class Component(ABC):
+class CoffeeCondiment(ABC):
+
+    def __init__(self, coffee):
+        self.coffee = coffee
+
     @abstractmethod
-    def execute(self):
+    def get_cost(self):
+        pass
+
+    @abstractmethod
+    def describe(self):
         pass
 
 
-class ConcreteComponent(Component):
-    def execute(self):
-        print("A")
+class Milk(CoffeeCondiment):
+
+    def get_cost(self):
+        return self.coffee.get_cost() + 1.5
+
+    def describe(self):
+        return self.coffee.describe() + " + milk"
 
 
-class BaseDecorator(Component):
-    def __init__(self, wrappee):
-        self.wrappee = wrappee
+class Shot(CoffeeCondiment):
 
-    def execute(self):
-        self.wrappee.execute()
+    def get_cost(self):
+        return self.coffee.get_cost() + 1
+
+    def describe(self):
+        return self.coffee.describe() + " + shot"
 
 
-class ConcreteDecorator(BaseDecorator):
-    def execute(self):
-        super().execute()
-        self.extra()
+class CoffeeBase(ABC):
 
-    def extra(self):
-        print("B")
+    @abstractmethod
+    def get_cost(self):
+        pass
+
+    @abstractmethod
+    def describe(self):
+        pass
+
+
+class Liberica(CoffeeBase):
+
+    def __init__(self):
+        self.name = "Liberica coffee"
+        self.cost = 5
+
+    def get_cost(self):
+        return self.cost
+
+    def describe(self):
+        return self.name
+
+
+class Robusta(CoffeeBase):
+
+    def __init__(self):
+        self.name = "Robusta coffee"
+        self.cost = 5
+
+    def get_cost(self):
+        return self.cost
+
+    def describe(self):
+        return self.name
 
 
 def main():
-    component = ConcreteComponent()
-    component = ConcreteDecorator(component)
-    component.execute()
+    # base coffee
+    coffee = Robusta()
+    # add condiment
+    coffee = Shot(Milk(Robusta()))
+
+    print(f"{coffee.describe()} costs ${coffee.get_cost()}")
 
 
 if __name__ == "__main__":
