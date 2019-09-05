@@ -4,7 +4,6 @@ https://www.slideshare.net/DamianGordon1/python-the-iterator-pattern
 
 
 class Collection(object):
-
     def __init__(self):
         self.data = []
 
@@ -16,7 +15,6 @@ class Collection(object):
 
 
 class Iterator(object):
-
     def __init__(self, data):
         self.data = data
         self.index = 0
