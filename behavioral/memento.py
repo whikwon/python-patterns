@@ -29,7 +29,6 @@ class SaveCommand(object):
 
 
 class RestoreCommand(object):
-
     def __init__(self, editor):
         self.editor = editor
 
