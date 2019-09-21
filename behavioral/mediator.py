@@ -1,69 +1,39 @@
-class Dashboard(object):
-
+class Auctioneer(object):
     def __init__(self):
-        self.racers = []
+        self.bid = 100
+        self.highest_bidder = "No one"
 
-    def add_racer(self, racer):
-        self.racers.append(racer)
-        print(f"Racer {racer.name} has registered.")
+    def accept_bid(self, user, bid):
+        if bid > self.bid:
+            self.bid = bid
+            self.highest_bidder = user
+        else:
+            print(f"{user}, your bid must be higher than the highest current bid.")
 
-    def update_status(self):
-        for i, racer in enumerate(self.racers):
-            print(f"[{i}]. Racer {racer.name} passed {racer.position}m")
+    def announce_price(self):
+        print(f"Current highest bid: ${self.bid}, {self.highest_bidder}")
 
 
-class CarRacer(object):
+class Bidder(object):
+    def __init__(self, name, auctioneer):
+        self.name = name
+        self.auctioneer = auctioneer
 
-    def __init__(self, name, dashboard):
-        self._name = name
-        self.dashboard = dashboard
-        self._position = 0
-        self._velocity = 0
-
-    def slow_down(self):
-        self._velocity -= 20
-        if self._velocity < 0:
-            self._velocity = 0
-
-    def speed_up(self):
-        self._velocity += 20
-
-    def drive(self):
-        self._position += self._velocity
-
-    def update_status(self):
-        self.dashboard.update_status()
-
-    @property
-    def name(self):
-        return self._name
-
-    @property
-    def position(self):
-        return self._position
+    def bid(self, price):
+        self.auctioneer.accept_bid(self.name, price)
+        self.auctioneer.announce_price()
 
 
 def main():
-    dashboard = Dashboard()
+    auctioneer = Auctioneer()
 
-    john = CarRacer("John", dashboard)
-    mike = CarRacer("Mike", dashboard)
-    anna = CarRacer("Anna", dashboard)
+    john = Bidder("John", auctioneer)
+    mike = Bidder("Mike", auctioneer)
+    anna = Bidder("Anna", auctioneer)
 
-    dashboard.add_racer(john)
-    dashboard.add_racer(mike)
-    dashboard.add_racer(anna)
-
-    john.speed_up()
-    john.speed_up()
-    mike.speed_up()
-    anna.speed_up()
-
-    john.drive()
-    mike.drive()
-    anna.drive()
-
-    john.update_status()
+    john.bid(120)
+    mike.bid(110)
+    anna.bid(150)
 
 
 if __name__ == "__main__":
