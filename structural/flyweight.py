@@ -10,17 +10,17 @@ The flyweight suggests that you stop storing the extrinsic state inside the obje
 class Flyweight(object):
     _instances = {}
 
-    def __new__(cls, data_type):
-        obj = cls._instances.get(data_type.key)
+    def __new__(cls, data):
+        obj = cls._instances.get(data.key)
         if obj is None:
-            cls._instances[data_type.key] = super().__new__(cls)
-            cls.data_type = data_type
+            cls._instances[data.key] = super().__new__(cls)
+            cls.data = data
         else:
             print("Flyweight already exists")
-        return cls._instances[data_type.key]
+        return cls._instances[data.key]
 
     def register(self, owner, plate):
-        print(f"{self.data_type} / {owner} / {plate} registration completed.")
+        print(f"{self.data} / {owner} / {plate} registration completed.")
 
 
 class VehicleInfo(object):
@@ -44,10 +44,11 @@ def register_car_to_police_database(vehicle_info, owner, plate):
 
 def main():
     vehicle_infos = [VehicleInfo("BMW", "X6", "Red"),
-                     VehicleInfo("BMW", "X6", "Red")]
+                     VehicleInfo("Benz", "E300", "Silver")]
 
     register_car_to_police_database(vehicle_infos[0], "John", "CL234IR")
-    register_car_to_police_database(vehicle_infos[1], "Mike", "CL234IR")
+    register_car_to_police_database(vehicle_infos[0], "Mike", "HR26DK8337")
+    register_car_to_police_database(vehicle_infos[1], "Anna", "DL7CQ1939")
 
 
 if __name__ == "__main__":
