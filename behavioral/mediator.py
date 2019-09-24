@@ -1,7 +1,9 @@
 class Auctioneer(object):
-    def __init__(self):
-        self.bid = 100
+    def __init__(self, item, init_price):
+        self.item = item
+        self.bid = init_price
         self.highest_bidder = "No one"
+        print(f"Bidding for '{item}' bidding starts at ${init_price}")
 
     def accept_bid(self, user, bid):
         if bid > self.bid:
@@ -25,7 +27,9 @@ class Bidder(object):
 
 
 def main():
-    auctioneer = Auctioneer()
+    init_price = 100
+    item = "Lionel Messi Signed Ball"
+    auctioneer = Auctioneer(item, init_price)
 
     john = Bidder("John", auctioneer)
     mike = Bidder("Mike", auctioneer)
