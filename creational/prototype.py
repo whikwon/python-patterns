@@ -5,7 +5,6 @@ from copy import deepcopy
 
 
 class Prototype(object):
-
     def clone(self, **attrs):
         obj = deepcopy(self)
         obj.__dict__.update(attrs)
@@ -13,7 +12,6 @@ class Prototype(object):
 
 
 class Human(Prototype):
-
     def __init__(self, name, weight):
         self.name = name
         self.weight = weight
