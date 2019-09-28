@@ -43,7 +43,7 @@ def main():
     save_command = SaveCommand(editor)
     restore_command = RestoreCommand(editor)
 
-    editor.text += "In the afternoon, "
+    editor.text += "Yesterday afternoon, "
     save_command.execute()
     editor.text += "I were in the park."
     restore_command.execute()
