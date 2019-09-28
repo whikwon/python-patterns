@@ -22,8 +22,9 @@ class Iterator(object):
 
     def __next__(self):
         if self.index < self.num_data:
+            value = self.data[self.index]
             self.index += 1
-            return self.data[self.index - 1]
+            return value
         else:
             raise StopIteration()
 
