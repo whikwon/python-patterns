@@ -37,29 +37,37 @@ class EuropeIPhoneCharger(IPhoneCharger):
 
 class PowerPlugAdapterFactory(ABC):
     def __init__(self):
-        self.adapter = self.get_powerplug()
+        self.powerplug = self.get_powerplug()
 
     @abstractmethod
     def get_powerplug(self):
         pass
 
-    def set_voltage(self, item, voltage):
-        assert hasattr(item, "voltage")
-        item.voltage = voltage
+    @abstractmethod
+    def set_voltage(self, item):
+        pass
 
     def plug_charger_in(self, item):
-        self.set_voltage(item, self.adapter.voltage)
-        self.adapter.plug_charger_in(item)
+        self.set_voltage(item)
+        self.powerplug.plug_charger_in(item)
 
 
 class USEuropePowerPlugAdapter(PowerPlugAdapterFactory):
     def get_powerplug(self):
         return EuropePowerPlug()
 
+    def set_voltage(self, item):
+        assert hasattr(item, "voltage")
+        item.voltage = 220
+
 
 class EuropeUSPowerPlugAdapter(PowerPlugAdapterFactory):
     def get_powerplug(self):
         return USPowerPlug()
+
+    def set_voltage(self, item):
+        assert hasattr(item, "voltage")
+        item.voltage = 110
 
 
 def main():
