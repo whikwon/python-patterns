@@ -36,6 +36,9 @@ class EuropeIPhoneCharger(IPhoneCharger):
 
 
 class PowerPlugAdapterFactory(ABC):
+    def __init__(self):
+        self.adapter = self.get_powerplug()
+
     @abstractmethod
     def get_powerplug(self):
         pass
@@ -50,17 +53,11 @@ class PowerPlugAdapterFactory(ABC):
 
 
 class USEuropePowerPlugAdapter(PowerPlugAdapterFactory):
-    def __init__(self):
-        self.adapter = self.get_powerplug()
-
     def get_powerplug(self):
         return EuropePowerPlug()
 
 
 class EuropeUSPowerPlugAdapter(PowerPlugAdapterFactory):
-    def __init__(self):
-        self.adapter = self.get_powerplug()
-
     def get_powerplug(self):
         return USPowerPlug()
 
